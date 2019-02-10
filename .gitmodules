@@ -1,0 +1,6 @@
+[submodule "tor-fetcher/external/tls-socket-wasm"]
+	path = tor-fetcher/external/tls-socket-wasm
+	url = https://github.com/acatarineu/tls-socket-wasm.git
+[submodule "tor-fetcher/external/ceba.js"]
+	path = tor-fetcher/external/ceba.js
+	url = https://github.com/acatarineu/ceba.js.git
