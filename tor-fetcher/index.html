@@ -1,12 +1,41 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta http-equiv="X-UA-Compatible" content="ie=edge">
-</head>
-<body>
-<script src="./dist/main.js"></script>
-</body>
-  
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <style>
+      table {
+        border-collapse: collapse;
+        border-spacing: 0;
+      }
+
+      th, td {
+        text-align: left;
+        padding: 8px;
+      }
+      tr:nth-child(even){background-color: #f2f2f2}
+    </style>
+  </head>
+  <body style="text-align:center; padding:20px;">
+    <p>This is Tor client compiled to WebAssembly which connects to Tor network (ab)using the SnowFlake WebSocket bridge, plus some glue code to handle HTTP, TLS, and Socks5 protocol in the browser.</p>
+    <p>Please, try in Chromium. Not working in Firefox 65+, due to some incompatibility with WebSocket bridge server (which I do not control).</p>
+    
+      <div style="float:left"> <h1>Fetch URL through Tor:</h1> <input id="url" value="https://api.ipify.org/"></input> <button onclick='doTorFetch()' id='fetch'>Fetch!</button></div><br/> 
+    <div style="float:right"> <h1>Console log:</h1> <br/>              
+      <div id ="cont" style="overflow-y:auto;height:500px;width:800px;font-family: Courier New, Courier, monospace; float:right">      
+        <table>
+          <tbody id = "log"></tbody>
+        </table>
+      </div>
+    </div>
+
+    <script src="./dist/main.js"></script>
+    <script>
+      function doTorFetch() {
+        const url = document.getElementById('url').value;
+        torFetch(url).then(x => x.text()).then(x => console.log('Fetch successful!', x)).catch((e) => console.log('Fetch error!', e.msg));
+      }
+    </script>
+  </body>
 </html>
