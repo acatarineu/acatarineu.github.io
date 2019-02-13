@@ -1,7 +1,7 @@
 // import makeTorModule from '../external/ceba.js/build/tor';
 import makeTLSSocketModule from '../external/tls-socket-wasm/dist/tls-socket-wasm';
 // import { HTTPParser } from 'http-parser-js';
-import FetchFactory from '../fetch-factory/fetch-factory';
+import FetchFactory from './fetch-factory';
 
 // const torModule = makeTorModule();
 // const tlsSocketModule = makeTLSSocketModule();
