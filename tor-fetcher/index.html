@@ -18,12 +18,11 @@
     </style>
   </head>
   <body style="text-align:center; padding:20px;">
-    <p>This is Tor client compiled to WebAssembly which connects to Tor network (ab)using the SnowFlake WebSocket bridge, plus some glue code to handle HTTP, TLS, and Socks5 protocol in the browser.</p>
+    <p>This is Tor client compiled to WebAssembly which connects to Tor network (ab)using the SnowFlake WebSocket bridge, plus some glue code to handle HTTP, TLS, and Socks5 protocol in the browser. <a target="_blank" rel="noopener noreferrer" href="https://github.com/acatarineu/acatarineu.github.io/tree/master/tor-fetcher">Code</a></p>
     <p>Please, try in <b>Firefox ESR 60</b> or <b>Chromium</b>. Not working in Firefox 65+, due to some incompatibility with WebSocket bridge server (which I do not control).</p>
-    <p><a target="_blank" rel="noopener noreferrer" href="https://github.com/acatarineu/acatarineu.github.io/tree/master/tor-fetcher">Code</a></p>
-      <div style="float:left"> <h1>Fetch URL through Tor:</h1> <input id="url" value="https://api.ipify.org/"></input> <button onclick='doTorFetch()' id='fetch'>Fetch!</button></div><br/> 
-    <div style="float:right"> <h1>Console log:</h1> <br/>              
-      <div id ="cont" style="overflow-y:auto;height:500px;width:800px;font-family: Courier New, Courier, monospace; float:right">      
+      <div style="width:100%;float:left"> <h3>Fetch URL through Tor:</h3> <input id="url" value="https://api.ipify.org/"></input> <button onclick='doTorFetch()' id='fetch'>Fetch!</button></div><br/> 
+    <div style="width:100%;float:right"> <h3>Console log:</h3> <br/>              
+      <div id ="cont" style="overflow-y:auto;height:500px;font-family: Courier New, Courier, monospace; float:right">      
         <table>
           <tbody id = "log"></tbody>
         </table>
