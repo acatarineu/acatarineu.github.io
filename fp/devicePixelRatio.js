@@ -51,33 +51,55 @@ function toFraction(x) {
   return addFraction([floor, 1], closestFrac(rest, 70));
 }
 
-let maxVal = 0;
+const measurements = {
+  scrollY: { maxVal: null, lastSeen: null },
+  clientRect: { maxVal: null, lastSeen: null },
+};
 
-function guessDevicePixelRatio() {
+function render() {
   const elem = document.getElementById('box');
   elem.innerText = 'window.devicePixelRatio = ' + window.devicePixelRatio + '\n';
-  elem.innerText += 'guessed devicePixelRatio = ' + (maxVal || '??? please scroll a bit') + '\n';
+  for (let key in measurements) {
+    elem.innerText += `devicePixelRatio via ${key} = ${measurements[key].maxVal}\n`;
+  }
 }
 
-let lastseen = null;
-
 window.addEventListener('scroll', () => {
-  if (window.scrollY) {
-    let frac = toFraction(window.scrollY);
-    if (lastseen) {
-      const gcd = gcdFraction(lastseen, frac);
-      lastSeen = gcd;
-      maxVal = Math.max(gcd[1] / gcd[0], maxVal);
-      guessDevicePixelRatio();
-    } else {
-      lastseen = frac;
+  // Currently can be measured via window.scrollY or getBoundingClientRect().
+  const values = {
+    scrollY: window.scrollY,
+    clientRect: 8 + document.body.getBoundingClientRect().height - document.body.getBoundingClientRect().bottom,
+  };
+  // This finds the gcd of the measurements to calculate devicePixelRatio.
+  // I have the feeling there must be a much easier way to do this though.
+  for (let key in values) {
+    const value = values[key];
+    const measurement = measurements[key];
+    if (value) {
+      let frac = toFraction(value);
+      if (measurement.lastSeen) {
+        const gcd = gcdFraction(measurement.lastSeen, frac);
+        measurement.lastSeen = gcd;
+        measurement.maxVal = Math.max(gcd[1] / gcd[0], measurement.maxVal);
+        render();
+      } else {
+        measurement.lastSeen = frac;
+      }
     }
   }
 });
 
 window.addEventListener('load', () => {
   window.scrollTo(0, 0);
-  lastseen = null;
-  maxVal = 0;
-  guessDevicePixelRatio();
+  window.scrollTo({
+    top: 100,
+    behavior: 'smooth',
+  });
+  setTimeout(() => {
+    window.scrollTo({
+      top: 0,
+      behavior: 'smooth',
+    });
+  }, 500);
+  render();
 });
