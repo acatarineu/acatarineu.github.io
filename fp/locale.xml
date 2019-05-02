@@ -1,7 +1,10 @@
-<!DOCTYPE html SYSTEM "chrome://branding/locale/brand.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml">
-  <head>
-    <meta charset="utf-8"/>
+<!DOCTYPE html SYSTEM "chrome://global/locale/netError.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><meta charset="utf-8"/>
   </head>
-  <body><span id="text-container">&trademarkInfo.part1;</span></body>
+  <body><span id="text-container">&loadError.label;</span>
+  <script>
+  window.addEventListener('message', (e) => {
+    e.source.postMessage(document.getElementById('text-container').innerText, '*');
+  });
+  </script>
+  </body>
 </html>
