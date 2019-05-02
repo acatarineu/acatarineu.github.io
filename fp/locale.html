@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html>
+    <head>
+    </head>
+    <body>
+        <strong>A string from your browser UI language:</strong> <span id="text-container"></span>
+        <iframe hidden id="mylocale" src="locale.xml"></iframe>
+        <script>
+            window.addEventListener('load', () => {
+                const elem = document.getElementById('mylocale');
+                const val = elem.contentDocument.getElementById('text-container').innerText;
+                document.getElementById('text-container').innerText = val;
+            });
+        </script>
+    </body>
+</html>
