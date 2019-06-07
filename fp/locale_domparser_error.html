@@ -1,0 +1,11 @@
+<!DOCTYPE html>
+<html>
+    <head>
+    </head>
+    <body>
+        <script>
+            const doc = (new DOMParser).parseFromString('getyourlocale', 'application/xhtml+xml');
+            alert(doc.getElementsByTagName('parsererror')[0].firstChild.textContent);
+        </script>
+    </body>
+</html>
